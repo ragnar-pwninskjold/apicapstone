@@ -135,24 +135,6 @@
 	right: 0;
 }
 
-.ui-slider-vertical {
-	width: .8em;
-	height: 100px;
-}
-.ui-slider-vertical .ui-slider-handle {
-	left: -.3em;
-	margin-bottom: -.6em;
-}
-.ui-slider-vertical .ui-slider-range {
-	left: 0;
-	width: 100%;
-}
-.ui-slider-vertical .ui-slider-range-min {
-	bottom: 0;
-}
-.ui-slider-vertical .ui-slider-range-max {
-	top: 0;
-}
 
 /* Component containers
 ----------------------------------*/
@@ -537,9 +519,7 @@ a.ui-button:active,
 .ui-icon-squaresmall-plus { background-position: -48px -208px; }
 .ui-icon-squaresmall-minus { background-position: -64px -208px; }
 .ui-icon-squaresmall-close { background-position: -80px -208px; }
-.ui-icon-grip-dotted-vertical { background-position: 0 -224px; }
 .ui-icon-grip-dotted-horizontal { background-position: -16px -224px; }
-.ui-icon-grip-solid-vertical { background-position: -32px -224px; }
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
