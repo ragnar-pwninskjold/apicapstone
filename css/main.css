@@ -1,0 +1,128 @@
+body {
+	background-color: #F2F2F2;
+}
+
+div {
+	margin: bottom: 100px;
+}
+
+
+.masthead {
+	height: 155px;
+	opacity: 0.8;
+	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.75);
+}
+
+.headline {
+	text-align: center;
+	display: block;
+	color: black;
+	font-size: 4.5rem;
+	padding-top: 5px;
+}
+
+.inputbox {
+	text-align: center;
+	display: block;
+	padding-top: 50px;
+}
+
+input {
+	text-align: center;
+	font-size: 1.8rem;
+	outline-style: solid;
+	outline-color: black;
+	background-color: white;
+	font-size: 3rem;
+}
+
+
+.categories {
+
+	text-align: center;
+	display: inline-block;
+	font-size: 1.5rem;
+
+}
+
+.metrics {
+
+		text-align: center;
+		display: inline-block;
+		font-size: 1.5rem;
+		vertical-align: top;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+.categories h1, .metrics h1 {
+	text-align: center;
+	padding-top: 50px;
+}
+
+
+footer {
+	padding-top: 200px;
+	text-align: center;
+	clear: left;
+}
+
+li {
+	width: 250px;
+	height: 30px;
+	margin: 0 auto;
+	padding-bottom: 10px;
+	font-size: 1.3rem;
+}
+
+ul{
+	text-align: center;
+	margin: 0 auto;
+}
+
+
+::-webkit-input-placeholder {
+   color: black;
+
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}
+
+
+/*
+#content-footer > p {
+  color: black;
+  margin: 0;
+  text-align: center;
+
+}
+
+#content-footer {
+  background-color: #D3CBBD;
+  margin: 0 auto;
+  border-radius: 50px;
+  padding: 25px;
+  padding-bottom: 20px;
+  margin-top: 275px;
+  width: 275px;
+}
+
+.social p {
+  display: inline-block;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+*/
