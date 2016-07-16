@@ -5,30 +5,94 @@
 	<title>Arbitrage Hack</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/main.css">
-	<!-- Font links will go here -->
+	<link href='https://fonts.googleapis.com/css?family=Inconsolata|Poiret+One|Josefin+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/jquery-ui.css">
+
 </head>
 <body>
 <header class="masthead">
 <hl class="headline">Amazon-Alibaba API Hack</hl>
 </header>
 
-<form class="inputbox">
-<input type="text" id="needed" autofocus value="What would you like to sell?"onfocus="this.value = this.value;" onclick="this.value=' ';">
-</form>
-
-
 <div id="lists">
 <div class="categories">
 <h1>Product categories:</h1>
 <ul>
+<li><input type="checkbox"><span class="buttonspacing">Home and furniture</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Kitchen</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Bathrooms and stuff</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Electronics</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Health and beauty</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Food</span></li>
+<li><input type="checkbox"><span class="buttonspacing">etc</span></li>
 </ul>
 </div>
 <div class="metrics">
 <h1>Metrics:</h1>
 <ul>
+<li>
+        <label>Price range:</label>
+  		<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+		
+</li>
+<div id="slider-range"></div>
+<li>
+	<label>Seller rank:</label>
+  	<input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</li>
+<div id="slider-range2"></div>
 </ul>
 </div>
 </div>
+<form class="inputbox">
+<input type="text" id="sell" autofocus value="What would you like to sell?"onfocus="this.value = this.value;" onclick="this.value=' ';">
+<table class="results-table">
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th> 
+    <th>Category</th>
+    <th>Rank</th>
+    <th>Review Rating</th>
+    <th>MOQ</th> 
+    <th>Price (MOQ)</th>
+    <th>Shipping cost</th> 
+    <th>Total cost of goods</th>
+  </tr>
+  <tr>
+    <td>Generic product name #1</td>
+    <td>$23.95</td> 
+    <td>Kitchen</td>
+    <td>#55</td>
+    <td>3.7</td>
+    <td>200 units</td>
+    <td>$6.34</td> 
+    <td>$0.35 per unit</td>
+    <td>$6.69 per unit</td>
+  </tr>
+ <tr>
+    <td>Generic product name #2</td>
+    <td>$12.46</td> 
+    <td>Home</td>
+    <td>#4</td>
+    <td>4.6</td>
+    <td>500 units</td>
+    <td>$4.13</td> 
+    <td>$0.28 per unit</td>
+    <td>$4.41 per unit</td>
+  </tr>
+	<tr>
+	<td>Generic product name #1</td>
+	<td>$23.95</td> 
+	<td>Kitchen</td>
+	<td>#55</td>
+	<td>3.7</td>
+	<td>200 units</td>
+	<td>$6.34</td> 
+	<td>$0.35 per unit</td>
+	<td>$6.69 per unit</td>
+	</tr>
+</table>
+</form>
 
 
 
@@ -38,6 +102,8 @@
 
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
 <script src="js/main.js"></script>
 </body>
 </html>

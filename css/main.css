@@ -8,7 +8,7 @@ div {
 
 
 .masthead {
-	height: 155px;
+	height: 135px;
 	opacity: 0.8;
 	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.75);
 }
@@ -18,39 +18,43 @@ div {
 	display: block;
 	color: black;
 	font-size: 4.5rem;
-	padding-top: 5px;
+	padding-top: 0px;
+	font-family: 'Inconsolata' ;
 }
-
 .inputbox {
 	text-align: center;
 	display: block;
-	padding-top: 50px;
+	padding-top: 0px;
 }
 
-input {
+input#sell {
 	text-align: center;
 	font-size: 1.8rem;
-	outline-style: solid;
 	outline-color: black;
 	background-color: white;
-	font-size: 3rem;
+	font-size: 1.6rem;
+	padding: 10px;
 }
 
 
 .categories {
 
-	text-align: center;
+	text-align: left;
 	display: inline-block;
 	font-size: 1.5rem;
+	margin-left: 15px;
+	font-family: 'Inconsolata' ;
 
 }
 
 .metrics {
 
-		text-align: center;
+		text-align: left;
 		display: inline-block;
 		font-size: 1.5rem;
 		vertical-align: top;
+		margin-left: 537px;
+		font-family: 'Inconsolata' ;
 }
 
 ul {
@@ -59,8 +63,8 @@ ul {
 }
 
 .categories h1, .metrics h1 {
-	text-align: center;
-	padding-top: 50px;
+	text-align: left;
+	font-size: 1.3rem;
 }
 
 
@@ -78,8 +82,7 @@ li {
 	font-size: 1.3rem;
 }
 
-ul{
-	text-align: center;
+ul {
 	margin: 0 auto;
 }
 
@@ -126,3 +129,55 @@ ul{
   margin-bottom: 10px;
 }
 */
+
+#lists {
+	margin-left: 115px;
+}
+
+
+
+.categories input {
+
+	border: none;
+
+}
+
+.buttonspacing {
+
+	padding-left: 6px;
+}
+
+table, th, td {
+   border: 1px solid black;
+   margin-top: 50px;
+}
+
+.results-table {
+	width: 90%;
+	margin: 50px auto;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+th {
+	height: 40px;
+    background-color: #232f3e;
+    color: white;
+
+}
+
+th, td {
+    padding: 5px;
+}
+
+tr:hover {
+	background-color: #FF7819;
+}
+
+#amount, #amount2 {
+	background-color: #F2F2F2;
+	width: 100px;
+}
+
+#slider-range, #slider-range2 {
+	margin-bottom: 10px;
+}
