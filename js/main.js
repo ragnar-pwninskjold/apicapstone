@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	//alert("This tool will enable you to search Amazon.com for a string of text in a specific category, and will return opportunities for price arbitrage given Alibaba wholesaler prices for a given product");
+	alert("This tool will enable you to search Amazon.com for a string of text in a specific category, and will return opportunities for price arbitrage given Alibaba wholesaler prices for a given product");
 
  $( "#slider-range" ).slider({
       range: true,
