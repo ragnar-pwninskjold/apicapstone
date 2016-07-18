@@ -45,25 +45,26 @@ function amazonRequest(tags) {
 		AWSAccessKeyId: 'AKIAJKYYBVNYWK2ZRVPA',
 		Keywords: "Coffee",
 		Operation: 'ItemLookup',
-		ResponseGroup: "'ItemAttributes', 'SalesRank'",
+		ResponseGroup:'ItemAttributes',
 		SearchIndex: 'Appliances',
 		Service: 'AWSECommerceService',
 		Sort: 'price',
 		Timestamp: $.now()
 	};
-
+	console
 	var parameters = [params.AssociateTag, params.AWSAccessKeyId, params.Keywords, params.Operation, params.ResponseGroup,  params.SearchIndex, params.Service, params.Sort, params.Timestamp];
-	var keyToAppend = signString(parameters);
-	var appendedKey = "AWSAccessKeyId="+keyToAppend;
+	var keyToAppend = signString(parameters, params);
+	//var appendedKey = "AWSAccessKeyId="+keyToAppend;
 	var SecretKeyAccessId = "J8/0owwre39h5kX6Jht1OsMt+UgoeeMRn9QmrAEW";
 	var signThis = 
 		"GET\n" +
 		"webservices.amazon.com\n" +
 		"/onca/xml\n" +
-		appendedKey;
+		keyToAppend;
 	
 	var hash = CryptoJS.HmacSHA256(signThis, SecretKeyAccessId);
 	console.log(btoa(hash));
+	//var encoded = btoa(hash);
 	$.ajax({
 		url: "https://webservices.amazon.com/onca/xml",
 		data: parameters,
@@ -85,11 +86,16 @@ function amazonRequest(tags) {
 	//});
 }
 
-function signString (para) {
-	$.each(para, function(i, item) {
-		var keySpot = item;
-		keyToSign = item + "&";
-	});
-	//console.log(keyToSign);
+function signString (para, fullParams) {
+	var keyToSign='';
+	var theKey = Object.keys(fullParams);
+	console.log(theKey);
+	for (i=0; i<para.length; i++) {
+		var keySpot = theKey[i]  + "=" + para[i] + "&";
+	    keyToSign = keyToSign + keySpot;
+	    console.log(keyToSign);
+	    }
+	console.log(keyToSign);
 	return keyToSign;
 }
+
