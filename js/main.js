@@ -35,67 +35,67 @@ $('.inputbox').submit( function(event){
 		var tag = $(this).find("input[id='sell']").val();
 		console.log(tag);
 		amazonRequest(tag);
+		//ebayRequest();
 
 	});
 });
 
 function amazonRequest(tags) {
 	params = { 
-		AssociateTag: 'apicapstone-20',
-		AWSAccessKeyId: 'AKIAJKYYBVNYWK2ZRVPA',
-		Keywords: "Coffee",
-		Operation: 'ItemLookup',
-		ResponseGroup:'ItemAttributes',
-		SearchIndex: 'Appliances',
-		Service: 'AWSECommerceService',
-		Sort: 'price',
-		Timestamp: $.now()
+		category: "Appliances",
+		search: tags
+		//need to fill in from checkbox input Category: ,
 	};
-	console
-	var parameters = [params.AssociateTag, params.AWSAccessKeyId, params.Keywords, params.Operation, params.ResponseGroup,  params.SearchIndex, params.Service, params.Sort, params.Timestamp];
-	var keyToAppend = signString(parameters, params);
-	//var appendedKey = "AWSAccessKeyId="+keyToAppend;
-	var SecretKeyAccessId = "J8/0owwre39h5kX6Jht1OsMt+UgoeeMRn9QmrAEW";
-	var signThis = 
-		"GET\n" +
-		"webservices.amazon.com\n" +
-		"/onca/xml\n" +
-		keyToAppend;
 	
-	var hash = CryptoJS.HmacSHA256(signThis, SecretKeyAccessId);
-	console.log(btoa(hash));
-	//var encoded = btoa(hash);
 	$.ajax({
-		url: "https://webservices.amazon.com/onca/xml",
-		data: parameters,
-		dataType: "xml",//use jsonp to avoid cross origin issues
+		url: "http://localhost:8888/amazonphpapi/index.php",
+		data: params,
 		type: "GET",
 	})
-	.done(function(result){ //this waits for the ajax to return with a succesful promise object
+	.done(function(result) {
 
-			console.log(result);
-			//$.each(result.items, function(i, item) {
+		console.log(JSON.parse(result));
 
-			//console.log(top);
-			//$(".results").append(showTop(item));
-			//});
 	});
 	//.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
 	//	var errorElem = showError(error);
 	//	$('.search-results').append(errorElem);
 	//});
 }
+/*
+function ebayRequest() {
+	var url = "http://svcs.ebay.com/services/search/FindingService/v1";
+    url += "?OPERATION-NAME=findItemsByKeywords";
+    url += "&SERVICE-VERSION=1.0.0";
+    url += "&SECURITY-APPNAME=SeanKoch-APICapst-SBX-d09b8ef6f-e9696e94";
+    url += "&GLOBAL-ID=EBAY-US";
+    url += "&RESPONSE-DATA-FORMAT=JSON";
+    url += "&callback=_cb_findItemsByKeywords";
+    url += "&REST-PAYLOAD";
+    url += "&keywords=harry%20potter";
+    url += "&paginationInput.entriesPerPage=3";
+	console.log(url); 
+	}
 
-function signString (para, fullParams) {
+	var params {}
+
+
+
+/*
+function makeString(para, fullParams) {
 	var keyToSign='';
 	var theKey = Object.keys(fullParams);
 	console.log(theKey);
-	for (i=0; i<para.length; i++) {
+	for (i=0; i<para.length-1; i++) {
 		var keySpot = theKey[i]  + "=" + para[i] + "&";
 	    keyToSign = keyToSign + keySpot;
-	    console.log(keyToSign);
 	    }
+	for (i=0; i<1; i++) {
+		keySpot = theKey[para.length-1]+"="+para[para.length-1];
+		keyToSign = keyToSign + keySpot;
+	}
 	console.log(keyToSign);
 	return keyToSign;
 }
+*/
 

@@ -47,7 +47,7 @@ input#sell {
 
 }
 
-.metrics {
+#metrics {
 
 		text-align: left;
 		display: inline-block;
@@ -62,7 +62,7 @@ ul {
 	padding: 0;
 }
 
-.categories h1, .metrics h1 {
+.categories h1, #metrics h1 {
 	text-align: left;
 	font-size: 1.3rem;
 }
@@ -131,7 +131,7 @@ ul {
 */
 
 #lists {
-	margin-left: 115px;
+	margin-left: 50px;
 }
 
 
@@ -180,4 +180,14 @@ tr:hover {
 
 #slider-range, #slider-range2 {
 	margin-bottom: 10px;
+}
+
+.list-sep {
+	float:left;
+	margin-right: 20px;
+}
+
+.categories h1 {
+	margin-bottom: 50px;
+	margin-left: 123px;
 }

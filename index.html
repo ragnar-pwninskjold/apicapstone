@@ -15,19 +15,34 @@
 </header>
 
 <div id="lists">
+<div class = "container">
 <div class="categories">
 <h1>Product categories:</h1>
 <ul>
-<li><input type="checkbox"><span class="buttonspacing">Home and furniture</span></li>
-<li><input type="checkbox"><span class="buttonspacing">Kitchen</span></li>
-<li><input type="checkbox"><span class="buttonspacing">Bathrooms and stuff</span></li>
+<div class = "list-sep">
+<li><input type="checkbox"><span class="buttonspacing">Appliances</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Arts, Crafts and Sewing</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Automotive</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Baby</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Beauty and Personal Care</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Books</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Clothing, Shoes and Jewelry</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Computers</span></li>
 <li><input type="checkbox"><span class="buttonspacing">Electronics</span></li>
-<li><input type="checkbox"><span class="buttonspacing">Health and beauty</span></li>
-<li><input type="checkbox"><span class="buttonspacing">Food</span></li>
-<li><input type="checkbox"><span class="buttonspacing">etc</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Grocery and Gourmet food</span></li>
+</div>
+<div class = "list-sep">
+<li><input type="checkbox"><span class="buttonspacing">Home and Kitchen</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Office Products</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Pet Supplies</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Sports and Outdoors</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Tools and Home Improvement</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Toys and Games</span></li>
+<li><input type="checkbox"><span class="buttonspacing">Video Games</span></li>
 </ul>
 </div>
-<div class="metrics">
+</div>
+<div id="metrics">
 <h1>Metrics:</h1>
 <ul>
 <li>
@@ -45,7 +60,8 @@
 </div>
 </div>
 <form class="inputbox">
-<input type="text" id="sell" autofocus value="What would you like to sell?"onfocus="this.value = this.value;" onclick="this.value=' ';">
+<input type="text" id="sell" autofocus value="What type of item were you looking for?"onfocus="this.value = this.value;" onclick="this.value=' ';">
+<div class="results"></div>
 <table class="results-table">
   <tr>
     <th>Product Name</th>
@@ -53,10 +69,9 @@
     <th>Category</th>
     <th>Rank</th>
     <th>Review Rating</th>
-    <th>MOQ</th> 
-    <th>Price (MOQ)</th>
-    <th>Shipping cost</th> 
-    <th>Total cost of goods</th>
+    <th>Ebay Product Name</th>
+    <th>Average Ebay Price</th> 
+    
   </tr>
   <tr>
     <td>Generic product name #1</td>
@@ -64,10 +79,8 @@
     <td>Kitchen</td>
     <td>#55</td>
     <td>3.7</td>
-    <td>200 units</td>
-    <td>$6.34</td> 
-    <td>$0.35 per unit</td>
-    <td>$6.69 per unit</td>
+    <td>Generic product name #1</td>
+    <td>$19.99</td>
   </tr>
  <tr>
     <td>Generic product name #2</td>
@@ -75,21 +88,17 @@
     <td>Home</td>
     <td>#4</td>
     <td>4.6</td>
-    <td>500 units</td>
-    <td>$4.13</td> 
-    <td>$0.28 per unit</td>
-    <td>$4.41 per unit</td>
+    <td>Generic product name #2a</td>
+    <td>$13.99</td>
   </tr>
 	<tr>
-	<td>Generic product name #1</td>
+	<td>Generic product name #3</td>
 	<td>$23.95</td> 
 	<td>Kitchen</td>
 	<td>#55</td>
 	<td>3.7</td>
-	<td>200 units</td>
-	<td>$6.34</td> 
-	<td>$0.35 per unit</td>
-	<td>$6.69 per unit</td>
+    <td>Generic product name #3</td>
+	<td>$18.95</td>
 	</tr>
 </table>
 </form>
