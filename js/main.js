@@ -41,7 +41,7 @@ $('.inputbox').submit( function(event){
 });
 
 function amazonRequest(tags) {
-	params = { 
+	var params = { 
 		category: "Appliances",
 		search: tags
 		//need to fill in from checkbox input Category: ,
@@ -54,13 +54,35 @@ function amazonRequest(tags) {
 	})
 	.done(function(result) {
 
-		console.log(JSON.parse(result));
+		i = JSON.parse(result);
+		items = i.Items.Item;
+		console.log(items);
+		$(".results-table").show();
+		$.each(items, function(i, item) {
+			var url = item.DetailPageURL;
+			var title = item.ItemAttributes.Title;
+			var salesRank = item.SalesRank;
+			var avgReview = item.Review;
+			var price = item.OfferSummary.LowestNewPrice.FormattedPrice;
+			var amazonResults = [title, price, "placeholder", salesRank, avgReview];
+			makeRow(amazonResults);
+		})
+
 
 	});
 	//.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
 	//	var errorElem = showError(error);
 	//	$('.search-results').append(errorElem);
 	//});
+}
+
+function makeRow(results) {
+	$(".results-table").append("<tr class='row'>");
+	$.each(results, function(i, item) {
+		$(".results-table").append("<td>"+item+"</td>");
+	});
+	$(".results-table").append("</tr>");
+
 }
 /*
 function ebayRequest() {
@@ -81,21 +103,7 @@ function ebayRequest() {
 
 
 
-/*
-function makeString(para, fullParams) {
-	var keyToSign='';
-	var theKey = Object.keys(fullParams);
-	console.log(theKey);
-	for (i=0; i<para.length-1; i++) {
-		var keySpot = theKey[i]  + "=" + para[i] + "&";
-	    keyToSign = keyToSign + keySpot;
-	    }
-	for (i=0; i<1; i++) {
-		keySpot = theKey[para.length-1]+"="+para[para.length-1];
-		keyToSign = keyToSign + keySpot;
-	}
-	console.log(keyToSign);
-	return keyToSign;
-}
 */
+
+
 

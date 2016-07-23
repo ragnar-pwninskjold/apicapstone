@@ -156,6 +156,7 @@ table, th, td {
 	width: 90%;
 	margin: 50px auto;
 	font-family: 'Josefin Sans', sans-serif;
+	display: none;
 }
 
 th {
