@@ -43,19 +43,23 @@
 </div>
 </div>
 <div id="metrics">
-<h1>Metrics:</h1>
+<h1>Filters:</h1>
 <ul>
-<li>
+    <li>
         <label>Price range:</label>
   		<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 		
-</li>
+    </li>
 <div id="slider-range"></div>
-<li>
-	<label>Seller rank:</label>
-  	<input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
-</li>
+    <li>
+	   <label>Seller rank:</label>
+  	   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
+    </li>
 <div id="slider-range2"></div>
+    <li class="limargins">
+        <input type="checkbox"><span class="buttonspacing">Free Shipping</span>
+    </li>
+   
 </ul>
 </div>
 </div>
@@ -71,6 +75,7 @@
     <th>Review Rating</th>
     <th>Ebay Product Name</th>
     <th>Average Ebay Price</th>
+    <th>Ebay Shipping cost</th>
   </tr>
   <tr class="table-data">
     <td class="title"></td>
@@ -80,6 +85,7 @@
     <td class="rating"></td>
     <td class="ebay-name"></td>
     <td class="ebay-price"></td>
+    <td class="ebay-shipping"></td>
   </tr>
 </table>
 </form>

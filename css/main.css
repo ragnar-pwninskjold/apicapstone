@@ -149,6 +149,11 @@ ul {
 	padding-left: 6px;
 }
 
+.limargins {
+	margin-top: 28px;
+	padding-left: 6px;
+}
+
 table, th, td {
    border: 1px solid black;
    margin-top: 50px;
