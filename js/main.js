@@ -34,9 +34,8 @@ $(document).ready(function() {
 		// get the value of the tags the user submitted
 		var tag = $(this).find("input[id='sell']").val();
 		console.log(tag);
-		var amzn = amazonRequest(tag);	
-		console.log(amzn);
-		var bay = ebayRequest(amzn);
+		amazonRequest(tag);	
+		
 	});
 });
 
@@ -57,20 +56,19 @@ function amazonRequest(tags) {
 		items = it.Items.Item;
 		console.log(items);
 		$(".results-table").show();
-		for (i=0;i<1;i++) {
+		for (i=0;i<items.length;i++) {
 			var url = items[i].DetailPageURL;
-			title = items[i].ItemAttributes.Title;
-    		console.log(title);
+			var title = items[i].ItemAttributes.Title;
     		//console.log(eRequest);
 			var salesRank = items[i].SalesRank;
 			var avgReview = items[i].Review;
 			var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
 			var category = "placeholder amazon category";
-			var ebayTitle = "placeholder ebay title";
-			var ebayShipping = "placeholder shipping cost";
-			var ebayPrice = "placeholder ebay price";
-			//ebayRequest(title);
+			var ebayTitle = " ";
+			var ebayShipping = " ";
+			var ebayPrice = " ";
 			rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayShipping, ebayPrice];
+			ebayRequest(rowEntries);
 		}
 	});
 
@@ -94,7 +92,7 @@ function ebayRequest(ebayTag) {
 		//it won't work for 'coffee', but will work for 'blender'
 		//something to do with the string?
 		//in testing this, certain strings return undefined, particularly those using -
-		"keywords": ebayTag,
+		"keywords": ebayTag[0],
 		"paginationInput.entriesPerPage": "5"
 	};
 	
@@ -106,11 +104,23 @@ function ebayRequest(ebayTag) {
 	})
 	.done(function(result) {
 		console.log(result);
-		ebayPrice = result.findItemsByKeywordsResponse[0].searchResult[0].item[0].sellingStatus[0].currentPrice[0].__value__;
+		//toMakeAvgEbayPrice=0;
+		priceToAvg = 0;
+		for (i=0;i<5;i++) {
+		ebayPrice = parseFloat(result.findItemsByKeywordsResponse[0].searchResult[0].item[i].sellingStatus[0].currentPrice[0].__value__);
+		priceToAvg += ebayPrice;
+		}
+		avgEbayPrice = priceToAvg/5;
+		avgEbayPrice = avgEbayPrice.toFixed(2);
+		//console.log(toMakeAvgEbayPrice);
 		ebayTitle = result.findItemsByKeywordsResponse[0].searchResult[0].item[0].title[0];
 		ebayShipping = result.findItemsByKeywordsResponse[0].searchResult[0].item[0].shippingInfo[0].shippingServiceCost[0].__value__;
-		ebayArray = [ebayTitle, ebayShipping, ebayPrice];
+		ebayArray = [ebayTitle, ebayShipping, avgEbayPrice];
 		console.log(ebayArray);
+		for (i=6; i<ebayTag.length;i++) {
+			ebayTag[i] = ebayArray[i-6];
+		}
+		makeRow(ebayTag);
 	});
 //	return ebayArray;
 }
@@ -131,8 +141,8 @@ function makeRow(rowArray) {
 		var ebayName = newRow.find(".ebay-name");
 		ebayName.text(rowArray[6]);
 		var ebayPriceSpot = newRow.find(".ebay-price");
-		ebayPriceSpot.text(rowArray[8]);
+		ebayPriceSpot.text("$"+rowArray[8]);
 		ebayShipping = newRow.find(".ebay-shipping");
-		ebayShipping.text(rowArray[7]);
+		ebayShipping.text("$"+rowArray[7]);
 		$(".results-table").append(newRow);
 }
