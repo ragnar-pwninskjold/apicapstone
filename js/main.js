@@ -53,22 +53,34 @@ function amazonRequest(tags) {
 		type: "GET",
 	})
 	.done(function(result) {
-
-		i = JSON.parse(result);
-		items = i.Items.Item;
+		it = JSON.parse(result);
+		items = it.Items.Item;
 		console.log(items);
 		$(".results-table").show();
-		$.each(items, function(i, item) {
-			var url = item.DetailPageURL;
-			var title = item.ItemAttributes.Title;
-			var salesRank = item.SalesRank;
-			var avgReview = item.Review;
-			var price = item.OfferSummary.LowestNewPrice.FormattedPrice;
-			var amazonResults = [title, price, "placeholder", salesRank, avgReview];
-			makeRow(amazonResults);
-		})
-
-
+			for (i=0;i<9;i++) {
+			var newRow = $(".table-data").clone();
+			//attach url to title eventually
+			var url = items[i].DetailPageURL;
+			var title = items[i].ItemAttributes.Title;
+			var titleSpot = newRow.find('.title');
+    		titleSpot.text(title);
+			var salesRank = items[i].SalesRank;
+			var salesRankSpot = newRow.find('.rank');
+			salesRankSpot.text(salesRank);
+			var avgReview = items[i].Review;
+			var avgReviewSpot = newRow.find('.rating');
+			avgReviewSpot.text(avgReview);
+			var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
+			var priceSpot = newRow.find('.price');
+			priceSpot.text(price);
+			var categorySpot = newRow.find(".category");
+			categorySpot.text("placeholder-category");
+			var ebaySpot = newRow.find(".ebay-name");
+			ebaySpot.text("placeholder ebay name");
+			var ebayPriceSpot = newRow.find(".ebay-price");
+			ebayPriceSpot.text("placeholder ebay price");
+			$(".results-table").append(newRow);
+		}
 	});
 	//.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
 	//	var errorElem = showError(error);
@@ -76,14 +88,7 @@ function amazonRequest(tags) {
 	//});
 }
 
-function makeRow(results) {
-	$(".results-table").append("<tr class='row'>");
-	$.each(results, function(i, item) {
-		$(".results-table").append("<td>"+item+"</td>");
-	});
-	$(".results-table").append("</tr>");
 
-}
 /*
 function ebayRequest() {
 	var url = "http://svcs.ebay.com/services/search/FindingService/v1";

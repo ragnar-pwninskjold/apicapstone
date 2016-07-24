@@ -48,13 +48,15 @@ input#sell {
 }
 
 #metrics {
-
 		text-align: left;
 		display: inline-block;
 		font-size: 1.5rem;
 		vertical-align: top;
 		margin-left: 537px;
 		font-family: 'Inconsolata' ;
+		position: absolute;
+   	 	top: 137px;
+    	right: 175px;
 }
 
 ul {
