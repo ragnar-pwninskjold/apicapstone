@@ -28,12 +28,13 @@ $(document).ready(function() {
       " - " + $( "#slider-range2" ).slider( "values", 1 ) );
 
 	//submit for the text string
-	$('.inputbox').submit( function(event){
+	$('.inputbox').submit(function(event){
 		event.preventDefault();
-		// zero out results if previous search has run
-		// get the value of the tags the user submitted
+	
+			
 		var tag = $(this).find("input[id='sell']").val();
-		console.log(tag);
+		
+		
 		amazonRequest(tag);	
 		
 	});
@@ -43,11 +44,10 @@ function amazonRequest(tags) {
 	var params = { 
 		category: "Appliances",
 		search: tags
-		//need to fill in from checkbox input Category: ,
 	};
 	
 	$.ajax({
-		url: "http://localhost:8888/amazonphpapi/index.php",
+		url: "http://tjstalcup.site/apac-php/",
 		data: params,
 		type: "GET"
 	})
@@ -55,27 +55,21 @@ function amazonRequest(tags) {
 		it = JSON.parse(result);
 		items = it.Items.Item;
 		console.log(items);
-		$(".results-table").show();
 		for (i=0;i<items.length;i++) {
 			var url = items[i].DetailPageURL;
 			var title = items[i].ItemAttributes.Title;
-    		//console.log(eRequest);
 			var salesRank = items[i].SalesRank;
 			var avgReview = items[i].Review;
 			var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
 			var category = "placeholder amazon category";
 			var ebayTitle = " ";
-			var ebayShipping = " ";
 			var ebayPrice = " ";
-			rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayShipping, ebayPrice];
+			primeEligible = items[i].Offers.Offer.OfferListing.IsEligibleForPrime;
+			console.log(primeEligible);
+			rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
 			ebayRequest(rowEntries);
 		}
 	});
-
-	//.fail(function(jqXHR, error){ //this waits for the ajax to return with an error promise object
-	//	var errorElem = showError(error);
-	//	$('.search-results').append(errorElem);
-	//});
 }
 
 
@@ -88,10 +82,6 @@ function ebayRequest(ebayTag) {
 		"GLOBAL-ID": "EBAY-US",
 		"RESPONSE-DATA-FORMAT": "JSON",
 		"callback": "_cb_findItemsByKeywords",
-		//Why won't ebayTag work for this specific search phrase?
-		//it won't work for 'coffee', but will work for 'blender'
-		//something to do with the string?
-		//in testing this, certain strings return undefined, particularly those using -
 		"keywords": ebayTag[0],
 		"paginationInput.entriesPerPage": "5"
 	};
@@ -104,29 +94,35 @@ function ebayRequest(ebayTag) {
 	})
 	.done(function(result) {
 		console.log(result);
-		//toMakeAvgEbayPrice=0;
-		priceToAvg = 0;
-		for (i=0;i<5;i++) {
-		ebayPrice = parseFloat(result.findItemsByKeywordsResponse[0].searchResult[0].item[i].sellingStatus[0].currentPrice[0].__value__);
-		priceToAvg += ebayPrice;
+		var ebayResult = result.findItemsByKeywordsResponse[0].searchResult[0];
+		if (typeof(ebayResult.item)!=="undefined") {
+
+			priceToAvg = 0;
+			for (i=0;i<ebayResult.item.length;i++) {
+					ebayPrice = parseFloat(ebayResult.item[i].sellingStatus[0].currentPrice[0].__value__);
+					priceToAvg += ebayPrice;
+			}
+			
+			avgEbayPrice = priceToAvg/ebayResult.item.length;
+			avgEbayPrice = avgEbayPrice.toFixed(2);
+			ebayTitle = ebayResult.item[0].title[0];
+			
+			ebayArray = [ebayTitle, avgEbayPrice];
+			for (i=6; i<ebayTag.length;i++) {
+				ebayTag[i] = ebayArray[i-6];
+			}
 		}
-		avgEbayPrice = priceToAvg/5;
-		avgEbayPrice = avgEbayPrice.toFixed(2);
-		//console.log(toMakeAvgEbayPrice);
-		ebayTitle = result.findItemsByKeywordsResponse[0].searchResult[0].item[0].title[0];
-		ebayShipping = result.findItemsByKeywordsResponse[0].searchResult[0].item[0].shippingInfo[0].shippingServiceCost[0].__value__;
-		ebayArray = [ebayTitle, ebayShipping, avgEbayPrice];
-		console.log(ebayArray);
-		for (i=6; i<ebayTag.length;i++) {
-			ebayTag[i] = ebayArray[i-6];
+		else {
+			ebayTag[6] = "Not Found";
 		}
 		makeRow(ebayTag);
+
 	});
 //	return ebayArray;
 }
 
 function makeRow(rowArray) {
-	var newRow = $(".table-data").clone();
+	var newRow = $(".templates .table-data").clone();
 	$(".results-table").show();
 		var titleSpot = newRow.find('.title');
     	titleSpot.text(rowArray[0]);
@@ -141,8 +137,6 @@ function makeRow(rowArray) {
 		var ebayName = newRow.find(".ebay-name");
 		ebayName.text(rowArray[6]);
 		var ebayPriceSpot = newRow.find(".ebay-price");
-		ebayPriceSpot.text("$"+rowArray[8]);
-		ebayShipping = newRow.find(".ebay-shipping");
-		ebayShipping.text("$"+rowArray[7]);
+		ebayPriceSpot.text("$"+rowArray[7]);
 		$(".results-table").append(newRow);
 }

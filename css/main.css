@@ -201,3 +201,7 @@ tr:hover {
 	margin-bottom: 50px;
 	margin-left: 123px;
 }
+
+.templates {
+	display: none;
+}
