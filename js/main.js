@@ -33,7 +33,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var tag = $(this).find("input[id='sell']").val();
 		var cat = $('input:checked').val();
-		console.log(cat);
+		//console.log(cat);
 		var priceRange = $('#slider-range').slider('option', 'values');
 		var salesRange = $('#slider-range2').slider('option', 'values');
 		//console.log(priceRange);
@@ -73,40 +73,33 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 		//console.log(result);
 		it = JSON.parse(result);
 		items = it.Items.Item;
-		console.log(items);
+		//console.log(items);
 		for (i=0;i<items.length;i++) {
-			var url = items[i].DetailPageURL;
-			var title = items[i].ItemAttributes.Title;
-			var salesRank = items[i].SalesRank;
-			if (salesRank < sRange[0] || salesRank > sRange[1]) {
-				console.log("sales rank out of range!");
-			}
-			else{
-				rCount++;
-				var avgReview = items[i].Review;
-				var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
-				var priceInt = (items[i].OfferSummary.LowestNewPrice.Amount)/100;
-				if (priceInt < pRange[0] || priceInt > pRange[1]){
-					console.log("price out of range!");
+			
+			
+				var url = items[i].DetailPageURL;
+				var title = items[i].ItemAttributes.Title;
+				var salesRank = items[i].SalesRank;
+				if (salesRank < sRange[0] || salesRank > sRange[1]) {
+					//console.log("sales rank out of range!"); //breaks it if salesRank out of range
 				}
 				else {
-					var category = cats;
-					var ebayTitle = " ";
-					var ebayPrice = " ";
-					rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
-					ebayRequest(rowEntries);
+					rCount++;
+					var avgReview = items[i].Review;
+					var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
+					var priceInt = (items[i].OfferSummary.LowestNewPrice.Amount)/100;
+					if (priceInt < pRange[0] || priceInt > pRange[1]){
+						//console.log("price out of range!"); //breaks it if price is out of range
+					}
+					else {
+						var category = cats;
+						var ebayTitle = " ";
+						var ebayPrice = " ";
+						rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
+						ebayRequest(rowEntries);
+					}
 				}
-			}
-		}
-		if (rCount<10) {
-			console.log(rCount);
-			//amazonRequest(tags, cats, pRange, sRange, pageNav);
-			//print this to the page to say 'x'/10 results matched filters
-
-		}
-		else {
-			console.log(rCount + "else");
-
+			
 		}
 	
 	});
@@ -125,7 +118,7 @@ function ebayRequest(ebayTag) {
 		"RESPONSE-DATA-FORMAT": "JSON",
 		"callback": "_cb_findCompletedItems",
 		"keywords": ebayTag[0],
-		"paginationInput.entriesPerPage": "5"
+		"paginationInput.entriesPerPage": "10"
 	};
 	
 	$.ajax({
@@ -135,17 +128,24 @@ function ebayRequest(ebayTag) {
 		type: "GET"
 	})
 	.done(function(result) {
-		console.log(result);
+		//console.log(result);
 		var ebayResult = result.findCompletedItemsResponse[0].searchResult[0];
 		if (typeof(ebayResult.item)!=="undefined") { 
 
 			priceToAvg = 0;
+			n=0;
 			for (i=0;i<ebayResult.item.length;i++) {//and a spot for selling status here too
+				if (ebayResult.item[i].sellingStatus[0].sellingState[0] !== "EndedWithoutSales") {
 					ebayPrice = parseFloat(ebayResult.item[i].sellingStatus[0].currentPrice[0].__value__);
 					priceToAvg += ebayPrice;
+					n++;
+					//console.log(n);
+					//console.log(priceToAvg);
+				}
 			}
 			
-			avgEbayPrice = priceToAvg/ebayResult.item.length;
+
+			avgEbayPrice = priceToAvg/n;
 			avgEbayPrice = avgEbayPrice.toFixed(2);
 			ebayTitle = ebayResult.item[0].title[0];
 			
