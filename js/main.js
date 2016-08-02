@@ -1,3 +1,4 @@
+pageCount = 1;
 $(document).ready(function() {
 
 	//alert("This tool will enable you to search Amazon.com for a string of text in a specific category, and will return opportunities for price arbitrage given Alibaba wholesaler prices for a given product. For example: If you chose 'Home and furniture' category and entered a search string with a range for prices and average sales rank of the product you wanted, it would return a table of opportunities to buy from Alibaba wholesaler and sell through Amazon. It will calculate the total expected profit margin as well");
@@ -5,8 +6,8 @@ $(document).ready(function() {
 	$( "#slider-range" ).slider({
       range: true,
       min: 0,
-      max: 100,
-      values: [0, 100 ],
+      max: 500,
+      values: [0, 500 ],
       slide: function( event, ui ) {
         $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
       }
@@ -18,8 +19,8 @@ $(document).ready(function() {
 	$( "#slider-range2" ).slider({
       range: true,
       min: 0,
-      max: 100,
-      values: [0, 100 ],
+      max: 1000,
+      values: [0, 1000],
       slide: function( event, ui ) {
         $( "#amount2" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
       }
@@ -30,28 +31,46 @@ $(document).ready(function() {
 	//submit for the text string
 	$('.inputbox').submit(function(event){
 		event.preventDefault();
-	
-			
 		var tag = $(this).find("input[id='sell']").val();
-		
-		
-		amazonRequest(tag);	
-		
+		var cat = $('input:checked').val();
+		console.log(cat);
+		var priceRange = $('#slider-range').slider('option', 'values');
+		var salesRange = $('#slider-range2').slider('option', 'values');
+		//console.log(priceRange);
+		//console.log(salesRange);
+
+		amazonRequest(tag, cat, priceRange, salesRange);
+		//add in counter for page #. Make a global page count for total and current
+		$(".templates .more-button").appendTo("body");
+	});
+
+	$(".more-button").on("click", function() {
+		pageCount++;
+		var tag = $("input[id='sell']").val();
+		var cat = $('input:checked').val();
+		var priceRange = $('#slider-range').slider('option', 'values');
+		var salesRange = $('#slider-range2').slider('option', 'values');
+		amazonRequest(tag, cat, priceRange, salesRange, pageCount);
 	});
 });
 
-function amazonRequest(tags) {
+rCount = 0;
+
+function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 	var params = { 
-		category: "Appliances",
-		search: tags
+		category: cats,
+		search: tags,
+		page: pgCount //global page count
 	};
-	
+
+
 	$.ajax({
 		url: "http://tjstalcup.site/apac-php/",
 		data: params,
 		type: "GET"
 	})
 	.done(function(result) {
+		//console.log(result);
 		it = JSON.parse(result);
 		items = it.Items.Item;
 		console.log(items);
@@ -59,29 +78,52 @@ function amazonRequest(tags) {
 			var url = items[i].DetailPageURL;
 			var title = items[i].ItemAttributes.Title;
 			var salesRank = items[i].SalesRank;
-			var avgReview = items[i].Review;
-			var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
-			var category = "placeholder amazon category";
-			var ebayTitle = " ";
-			var ebayPrice = " ";
-			primeEligible = items[i].Offers.Offer.OfferListing.IsEligibleForPrime;
-			console.log(primeEligible);
-			rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
-			ebayRequest(rowEntries);
+			if (salesRank < sRange[0] || salesRank > sRange[1]) {
+				console.log("sales rank out of range!");
+			}
+			else{
+				rCount++;
+				var avgReview = items[i].Review;
+				var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
+				var priceInt = (items[i].OfferSummary.LowestNewPrice.Amount)/100;
+				if (priceInt < pRange[0] || priceInt > pRange[1]){
+					console.log("price out of range!");
+				}
+				else {
+					var category = cats;
+					var ebayTitle = " ";
+					var ebayPrice = " ";
+					rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
+					ebayRequest(rowEntries);
+				}
+			}
 		}
+		if (rCount<10) {
+			console.log(rCount);
+			//amazonRequest(tags, cats, pRange, sRange, pageNav);
+			//print this to the page to say 'x'/10 results matched filters
+
+		}
+		else {
+			console.log(rCount + "else");
+
+		}
+	
 	});
 }
 
 
 
+
+
 function ebayRequest(ebayTag) {
 	var params = {
-		"OPERATION-NAME": "findItemsByKeywords",
+		"OPERATION-NAME": "findCompletedItems",
 		"SERVICE-VERSION": "1.0.0",
 		"SECURITY-APPNAME": "SeanKoch-APICapst-PRD-313d8b941-9995d360",
 		"GLOBAL-ID": "EBAY-US",
 		"RESPONSE-DATA-FORMAT": "JSON",
-		"callback": "_cb_findItemsByKeywords",
+		"callback": "_cb_findCompletedItems",
 		"keywords": ebayTag[0],
 		"paginationInput.entriesPerPage": "5"
 	};
@@ -94,11 +136,11 @@ function ebayRequest(ebayTag) {
 	})
 	.done(function(result) {
 		console.log(result);
-		var ebayResult = result.findItemsByKeywordsResponse[0].searchResult[0];
-		if (typeof(ebayResult.item)!=="undefined") {
+		var ebayResult = result.findCompletedItemsResponse[0].searchResult[0];
+		if (typeof(ebayResult.item)!=="undefined") { 
 
 			priceToAvg = 0;
-			for (i=0;i<ebayResult.item.length;i++) {
+			for (i=0;i<ebayResult.item.length;i++) {//and a spot for selling status here too
 					ebayPrice = parseFloat(ebayResult.item[i].sellingStatus[0].currentPrice[0].__value__);
 					priceToAvg += ebayPrice;
 			}

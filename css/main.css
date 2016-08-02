@@ -205,3 +205,10 @@ tr:hover {
 .templates {
 	display: none;
 }
+
+.more-button {
+	float: right;
+	margin-right: 66px;
+	margin-bottom: 15px;
+	margin-top: -30px;
+}
