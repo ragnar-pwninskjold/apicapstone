@@ -122,7 +122,7 @@ function ebayRequest(ebayTag) {
 	};
 	
 	$.ajax({
-		url: "http://svcs.ebay.com/services/search/FindingService/v1",
+		url: "https://svcs.ebay.com/services/search/FindingService/v1",
 		data: params,
 		dataType: "jsonp",
 		type: "GET"
