@@ -65,7 +65,7 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 
 
 	$.ajax({
-		url: "http://tjstalcup.site/apac-php/",
+		url: "https://tjstalcup.site/apac-php/",
 		data: params,
 		type: "GET"
 	})
