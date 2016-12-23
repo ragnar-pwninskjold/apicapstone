@@ -17,8 +17,8 @@
 <div id="lists">
 <div class = "container">
 <div class="categories">
-<h1>Product categories:</h1>
-<ul>
+<h1 class="categories-header">Product categories:</h1>
+<ul class="category-list">
 <div class = "list-sep">
 <!-- <li><input type="checkbox" value ="Apparel"><span class="buttonspacing">Apparel</span></li> -->
 <li><input type="checkbox" value="Appliances"><span class="buttonspacing">Appliances</span></li>
@@ -31,12 +31,7 @@
 </div>
 
 <div class = "list-sep">
-<!--<li><input type="checkbox" value="Fashion"><span class="buttonspacing">Fashion</span></li>
-<li><input type="checkbox" value="FashionBaby"><span class="buttonspacing">FashionBaby</span></li>
-<li><input type="checkbox" value="FashionBoys"><span class="buttonspacing">FashionBoys</span></li>
-<li><input type="checkbox" value="FashionGirls"><span class="buttonspacing">FashionGirls</span></li>
-<li><input type="checkbox" value="FashionMen"><span class="buttonspacing">FashionMen</span></li>
-<li><input type="checkbox" value="FashionWomen"><span class="buttonspacing">FashionWomen</span></li> -->
+
 <li><input type="checkbox" value="Classical"><span class="buttonspacing">Classical</span></li>
 <li><input type="checkbox" value="Clothing"><span class="buttonspacing">Clothing</span></li>
 <li><input type="checkbox" value="Electronics"><span class="buttonspacing">Electronics</span></li>
@@ -56,23 +51,25 @@
 </div>
 </ul>
 </div>
-</div>
+
 <div id="metrics">
 <h1>Filters:</h1>
 <ul>
-    <li>
+    <li class="filters">
         <label>Price range:</label>
   		<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
 		
     </li>
 <div id="slider-range"></div>
-    <li>
+    <li class="filters">
 	   <label>Seller rank:</label>
   	   <input type="text" id="amount2" readonly style="border:0; color:#f6931f; font-weight:bold;">
     </li>
 <div id="slider-range2"></div>
    
 </ul>
+</div>
+
 </div>
 
 <form class="inputbox">

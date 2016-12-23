@@ -26,6 +26,7 @@ div {
 	display: block;
 	padding-top: 0px;
 	margin-bottom: 50px;
+	margin-top: 50px;
 }
 
 input#sell {
@@ -44,8 +45,9 @@ input#sell {
 	text-align: left;
 	display: inline-block;
 	font-size: 1.5rem;
-	margin-left: 15px;
-	font-family: 'Inconsolata' ;
+	font-family: 'Inconsolata';
+	width: 70%;
+	margin-left: -15px;
 
 }
 
@@ -54,12 +56,12 @@ input#sell {
 		display: inline-block;
 		font-size: 1.5rem;
 		vertical-align: top;
-		margin-left: 537px;
-		font-family: 'Inconsolata' ;
-		position: absolute;
-   	 	top: 137px;
-    	right: 175px;
+		font-family: 'Inconsolata';
+		float: right;
+		width: 25%;
+		margin-right: 25px;
 }
+   	 
 
 ul {
 	list-style: none;
@@ -194,13 +196,9 @@ tr:hover {
 
 .list-sep {
 	float:left;
-	margin-right: 20px;
 }
 
-.categories h1 {
-	margin-bottom: 50px;
-	margin-left: 123px;
-}
+
 
 .templates {
 	display: none;
@@ -212,3 +210,95 @@ tr:hover {
 	margin-bottom: 15px;
 	margin-top: -30px;
 }
+
+@media (max-width: 1137px) {
+
+	.categories {
+		width: 50%;
+	}
+
+	#metrics {
+		width: 40%;
+	}
+
+	.inputbox {
+		margin-top: -130px;
+	}
+
+	.results-table {
+		margin-top: 100px;
+	}
+  
+}
+
+@media (max-width: 1065px) {
+
+	.categories-header {
+		width: 40%;
+		margin-right: 0px;
+	}
+
+	.categories {
+		width: 55%;
+	}
+  
+}
+
+@media (max-width: 975px) {
+
+	#metrics {
+		width: 35%;
+	}
+
+	.categories {
+		width: 58%;
+	}
+  
+}
+
+@media (max-width: 930px) {
+
+	.categories {
+		width: 63%;
+	}
+
+	.headline {
+		font-size: 3.5rem;
+	}
+  
+}
+
+@media (max-width: 860px) {
+
+	.categories {
+		width: 30%;
+	}
+
+	.categories-header {
+		width: 100%;
+	}
+
+	.inputbox {
+		margin-top: -400px;
+	}
+
+	.results-table {
+		margin-top: 355px;
+	}
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
