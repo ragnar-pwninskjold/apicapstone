@@ -65,7 +65,7 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 
 
 	$.ajax({
-		url: "http://tjstalcup.site/apac-php/",
+		url: "https://tjstalcup.site/apac-php/",
 		data: params,
 		type: "GET"
 	})
@@ -122,7 +122,7 @@ function ebayRequest(ebayTag) {
 	};
 	
 	$.ajax({
-		url: "http://svcs.ebay.com/services/search/FindingService/v1",
+		url: "https://svcs.ebay.com/services/search/FindingService/v1",
 		data: params,
 		dataType: "jsonp",
 		type: "GET"
