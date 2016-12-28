@@ -271,7 +271,7 @@ tr:hover {
 @media (max-width: 860px) {
 
 	.categories {
-		width: 30%;
+		width: 75%;
 	}
 
 	.categories-header {
@@ -283,12 +283,83 @@ tr:hover {
 	}
 
 	.results-table {
-		margin-top: 355px;
+		margin-top: 400px;
+	}
+
+	#sell {
+		position: absolute;
+	}
+
+	#metrics {
+		position: absolute;
+		top: 300px;
+		right: 70px;
 	}
   
 }
 
+@media (max-width: 565px) {
 
+	.results-table {
+		font-size: 12px;	
+	}
+  
+}
+
+@media (max-width: 820px) {
+
+	.list-sep:nth-child(2) {
+		margin-left: -30px;
+	}
+  
+}
+
+@media (max-width: 760px) {
+
+	.list-sep:nth-child(2) {
+		margin-left: -45px;
+	}
+  
+}
+
+@media (max-width: 745px) {
+
+	.container {
+		width: 85%;
+	}
+
+	.list-sep:nth-child(2) {
+		margin-left: 0px;
+	}
+
+	#metrics {
+		top: 137px;
+		right: 115px;
+	}
+
+	#sell {
+		top: 400px;
+		right: 115px;
+	}
+  
+}
+
+@media (max-width: 610px) {
+
+	#metrics {
+		position: static;
+		float: left;
+		margin-bottom: 100px;
+	}
+
+	#sell {
+		position: relative;
+		float: left;
+		margin-top: -200px !important;
+		margin-bottom: 50px;
+	}
+  
+}
 
 
 
