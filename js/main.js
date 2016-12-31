@@ -33,11 +33,8 @@ $(document).ready(function() {
 		event.preventDefault();
 		var tag = $(this).find("input[id='sell']").val();
 		var cat = $('input:checked').val();
-		//console.log(cat);
 		var priceRange = $('#slider-range').slider('option', 'values');
 		var salesRange = $('#slider-range2').slider('option', 'values');
-		//console.log(priceRange);
-		//console.log(salesRange);
 
 		amazonRequest(tag, cat, priceRange, salesRange);
 		//add in counter for page #. Make a global page count for total and current
@@ -70,10 +67,8 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 		type: "GET"
 	})
 	.done(function(result) {
-		//console.log(result);
 		it = JSON.parse(result);
 		items = it.Items.Item;
-		//console.log(items);
 		for (i=0;i<items.length;i++) {
 			
 			
@@ -86,6 +81,11 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 				else {
 					rCount++;
 					var avgReview = items[i].Review;
+					// console.log(avgReview);
+					// console.log(typeof(avgReview));
+					if (avgReview == "l>") {
+						console.log(avgReview);
+					}
 					var price = items[i].OfferSummary.LowestNewPrice.FormattedPrice;
 					var priceInt = (items[i].OfferSummary.LowestNewPrice.Amount)/100;
 					if (priceInt < pRange[0] || priceInt > pRange[1]){
@@ -139,12 +139,10 @@ function ebayRequest(ebayTag) {
 					ebayPrice = parseFloat(ebayResult.item[i].sellingStatus[0].currentPrice[0].__value__);
 					priceToAvg += ebayPrice;
 					n++;
-					//console.log(n);
-					//console.log(priceToAvg);
+
 				}
 			}
 			
-
 			avgEbayPrice = priceToAvg/n;
 			avgEbayPrice = avgEbayPrice.toFixed(2);
 			ebayTitle = ebayResult.item[0].title[0];
@@ -157,6 +155,7 @@ function ebayRequest(ebayTag) {
 		else {
 			ebayTag[6] = "Not Found";
 		}
+		console.log("ebayTag",ebayTag);
 		makeRow(ebayTag);
 
 	});

@@ -362,7 +362,14 @@ tr:hover {
 }
 
 
-
+.explanation {
+	text-align: center;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: -20px;
+    font-size: 1.25rem;
+    font-style: italic;
+}
 
 
 
