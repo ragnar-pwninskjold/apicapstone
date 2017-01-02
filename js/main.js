@@ -178,6 +178,7 @@ function ebayRequest(ebayTag) {
 		else {
 			ebayTag[6] = "Not Found";
 		}
+		
 		console.log("ebayTag",ebayTag);
 		makeRow(ebayTag);
 
