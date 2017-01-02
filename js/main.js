@@ -93,6 +93,29 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 					}
 					else {
 						var category = cats;
+						if (category == "HealthPersonalCare") {
+							category = "Health and Personal Care";
+						}
+
+						if (category == "LawnAndGarden") {
+							category = "Lawn and Garden";
+						}
+
+						if (category == "ArtsAndCrafts") {
+							category = "Arts and Crafts";
+						}
+
+						if (category == "GourmetFood") {
+							category = "Gourmet Food";
+						}
+
+						if (category == "HomeGarden") {
+							category = "Home and Garden";
+						}
+
+						if (category == "OfficeProducts") {
+							category = "Office Products";
+						}
 						var ebayTitle = " ";
 						var ebayPrice = " ";
 						rowEntries = [title, url, salesRank, avgReview, price, category, ebayTitle, ebayPrice];
