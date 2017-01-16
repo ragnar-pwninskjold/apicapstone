@@ -193,8 +193,8 @@ function makeRow(rowArray) {
     	titleSpot.text(rowArray[0]);
 		var salesRankSpot = newRow.find('.rank');
 		salesRankSpot.text(rowArray[2]);
-		var avgReviewSpot = newRow.find('.rating');
-		avgReviewSpot.text(rowArray[3]);
+		// var avgReviewSpot = newRow.find('.rating');
+		// avgReviewSpot.text(rowArray[3]);
 		var priceSpot = newRow.find('.price');
 		priceSpot.text(rowArray[4]);
 		var categorySpot = newRow.find(".category");
