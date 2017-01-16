@@ -124,6 +124,8 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 				}
 			
 		}
+
+		$(".more-button").css("display", "initial");
 	
 	});
 }
