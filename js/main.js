@@ -27,6 +27,7 @@ $(document).ready(function() {
     });
     $( "#amount2" ).val($( "#slider-range2" ).slider( "values", 0 ) +
       " - " + $( "#slider-range2" ).slider( "values", 1 ) );
+    $('input').blur();
 
 	//submit for the text string
 	$('.inputbox').submit(function(event){
