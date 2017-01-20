@@ -156,6 +156,7 @@ function ebayRequest(ebayTag) {
 	.done(function(result) {
 		//console.log(result);
 		var ebayResult = result.findCompletedItemsResponse[0].searchResult[0];
+		console.log("ebayResult", ebayResult);
 		if (typeof(ebayResult.item)!=="undefined") { 
 
 			priceToAvg = 0;
@@ -163,14 +164,24 @@ function ebayRequest(ebayTag) {
 			for (i=0;i<ebayResult.item.length;i++) {//and a spot for selling status here too
 				if (ebayResult.item[i].sellingStatus[0].sellingState[0] !== "EndedWithoutSales") {
 					ebayPrice = parseFloat(ebayResult.item[i].sellingStatus[0].currentPrice[0].__value__);
+					console.log("ebayprice", ebayPrice);
 					priceToAvg += ebayPrice;
 					n++;
 
 				}
+				console.log("n", n);
+			}
+
+			if (n == 0) {
+				avgEbayPrice = "No recent sales";
+			}
+			else {
+				avgEbayPrice = priceToAvg/n;
+				avgEbayPrice = avgEbayPrice.toFixed(2);
+				avgEbayPrice = "$" + avgEbayPrice;
 			}
 			
-			avgEbayPrice = priceToAvg/n;
-			avgEbayPrice = avgEbayPrice.toFixed(2);
+			
 			ebayTitle = ebayResult.item[0].title[0];
 			
 			ebayArray = [ebayTitle, avgEbayPrice];
@@ -205,6 +216,6 @@ function makeRow(rowArray) {
 		var ebayName = newRow.find(".ebay-name");
 		ebayName.text(rowArray[6]);
 		var ebayPriceSpot = newRow.find(".ebay-price");
-		ebayPriceSpot.text("$"+rowArray[7]);
+		ebayPriceSpot.text(rowArray[7]);
 		$(".results-table").append(newRow);
 }
