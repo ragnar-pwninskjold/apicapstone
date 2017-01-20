@@ -156,6 +156,7 @@ function ebayRequest(ebayTag) {
 	.done(function(result) {
 		//console.log(result);
 		var ebayResult = result.findCompletedItemsResponse[0].searchResult[0];
+		var itemUrl;
 		console.log("ebayResult", ebayResult);
 		if (typeof(ebayResult.item)!=="undefined") { 
 
@@ -167,6 +168,7 @@ function ebayRequest(ebayTag) {
 					console.log("ebayprice", ebayPrice);
 					priceToAvg += ebayPrice;
 					n++;
+					itemUrl = ebayResult.item[i].viewItemURL[0];
 
 				}
 				console.log("n", n);
@@ -194,17 +196,18 @@ function ebayRequest(ebayTag) {
 		}
 		
 		console.log("ebayTag",ebayTag);
-		makeRow(ebayTag);
+		makeRow(ebayTag, itemUrl);
 
 	});
 //	return ebayArray;
 }
 
-function makeRow(rowArray) {
+function makeRow(rowArray, url) {
 	var newRow = $(".templates .table-data").clone();
 	$(".results-table").show();
 		var titleSpot = newRow.find('.title');
     	titleSpot.text(rowArray[0]);
+    	
 		var salesRankSpot = newRow.find('.rank');
 		salesRankSpot.text(rowArray[2]);
 		// var avgReviewSpot = newRow.find('.rating');
