@@ -32,6 +32,7 @@ $(document).ready(function() {
 	//submit for the text string
 	$('.inputbox').submit(function(event){
 		event.preventDefault();
+		$(".loader").show();
 		var tag = $(this).find("input[id='sell']").val();
 		var cat = $('input:checked').val();
 		var priceRange = $('#slider-range').slider('option', 'values');
@@ -127,6 +128,7 @@ function amazonRequest(tags, cats, pRange, sRange, pgCount) {
 		}
 
 		$(".more-button").css("display", "initial");
+		$(".loader").hide();
 	
 	});
 }

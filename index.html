@@ -80,7 +80,11 @@ The application will return you results for each product on Amazon and eBay, whi
 </div>
 
 <form class="inputbox">
+<div class="input-loader-container">
 <input type="text" id="sell" value="Enter an item..." onclick="this.value=' ';">
+<div class="loader" style="display: none"></div>
+</div>
+</form>
 </div>
 <div class="results"></div>
 <table class="results-table">
@@ -95,7 +99,7 @@ The application will return you results for each product on Amazon and eBay, whi
   </tr>
   
 </table>
-</form>
+
 <div class="templates">
     <table>
         <tr class="table-data">
