@@ -223,4 +223,5 @@ function makeRow(rowArray, url) {
 		var ebayPriceSpot = newRow.find(".ebay-price");
 		ebayPriceSpot.text(rowArray[7]);
 		$(".results-table").append(newRow);
+		window.scrollTo(0, 900);
 }
