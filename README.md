@@ -14,6 +14,14 @@ This application was developed to assist users in finding opportunities for arbi
   
 #Technical Overview
 
+Stack/technology used in this project:
+
+* HTML
+* CSS
+* Javascript
+* jQuery
+* Bootstrap UI
+
 The technical implementation of this product is rather straightforward:
 
 * A user enters a search term into the input box, and selects a category
