@@ -256,6 +256,10 @@ tr:hover {
 	tbody {
 		font-size: 0.55rem;
 	}
+
+	input#sell {
+		margin-left: -45px !important;
+	}
   
 }
 
